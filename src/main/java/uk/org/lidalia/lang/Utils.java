@@ -1,7 +1,5 @@
 package uk.org.lidalia.lang;
 
-import java.util.concurrent.ConcurrentMap;
-
 public final class Utils {
 
 	public static <T> T valueOrDefault(T valueWhichMightBeNull, T defaultValue) {
