@@ -36,7 +36,7 @@ import java.util.concurrent.Callable;
 
 import org.junit.Test;
 
-public class TestExceptionUtils {
+public class TestExceptions {
 
 	@Test
 	public void asRuntimeExceptionThrowsIllegalArgumentExceptionWhenNullPassedIn() throws Throwable {

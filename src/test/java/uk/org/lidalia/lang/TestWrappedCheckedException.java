@@ -45,6 +45,6 @@ public class TestWrappedCheckedException {
 		RemoteException remoteException = new RemoteException();
 		WrappedCheckedException wrappedCheckedException = new WrappedCheckedException(remoteException);
 		assertSame(remoteException, wrappedCheckedException.getCause());
-		assertEquals("message", wrappedCheckedException.getMessage());
+		assertEquals("Throwing checked exception as cause of runtime exception", wrappedCheckedException.getMessage());
 	}
 }

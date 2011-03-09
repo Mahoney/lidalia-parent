@@ -37,7 +37,7 @@ public final class Exceptions {
 		} else if (throwable instanceof Error) {
 			throw (Error) throwable;
 		} else if (throwable instanceof RuntimeException) {
-			result = (RichRuntimeException) throwable;
+			result = (RuntimeException) throwable;
 		} else if (throwable instanceof InterruptedException || throwable instanceof InterruptedIOException) {
 			throw new IllegalArgumentException(
 					"An interrupted exception needs to be handled to end the thread, or the interrupted status needs to be " +
