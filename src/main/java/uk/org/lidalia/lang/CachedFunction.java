@@ -6,6 +6,8 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
+import com.google.common.base.Function;
+
 public class CachedFunction<A, R> implements Function<A, R> {
 	private final ConcurrentMap<A, FutureTask<R>> cache = new ConcurrentHashMap<A, FutureTask<R>>();
 	private final Function<A, R> function;
@@ -15,14 +17,14 @@ public class CachedFunction<A, R> implements Function<A, R> {
 	}
 
 	@Override
-	public R call(final A args) {
+	public R apply(final A args) {
 		while (true) {
 			FutureTask<R> result = cache.get(args);
 			if (result == null) {
-                result = MapUtils.putIfAbsentReturningValue(cache, args, new FutureTask<R>(new Callable<R>() {
+                result = Maps.putIfAbsentReturningValue(cache, args, new FutureTask<R>(new Callable<R>() {
                     @Override
                     public R call() throws Exception {
-                        return function.call(args);
+                        return function.apply(args);
                     }
                 }));
                 result.run();
@@ -33,12 +35,7 @@ public class CachedFunction<A, R> implements Function<A, R> {
                 Thread.currentThread().interrupt();
 				cache.remove(args, result);
 			} catch (ExecutionException e) {
-				if (e.getCause() instanceof RuntimeException)
-					throw (RuntimeException) e.getCause();
-				else if (e.getCause() instanceof Error)
-					throw (Error) e.getCause();
-				else
-					throw new IllegalStateException(e.toString(), e.getCause());
+				throw Exceptions.asRuntimeException(e);
 			}
 		}
 	}

@@ -1,8 +1,10 @@
 package uk.org.lidalia.lang;
 
+import static com.google.common.base.Objects.equal;
+import static uk.org.lidalia.lang.Classes.inSameClassHierarchy;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,25 +12,24 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static uk.org.lidalia.lang.ClassUtils.inSameClassHierarchy;
-import static uk.org.lidalia.lang.EqualityUtils.equal;
+import com.google.common.base.Function;
 
 public class RichObject {
-
 	private static final Function<Class<?>, Set<Field>> GET_IDENTITY_FIELDS = CachedFunction.make(new Function<Class<?>, Set<Field>>() {
-		@Override public Set<Field> call(Class<?> clazz) {
+		@Override
+		public Set<Field> apply(Class<?> clazz) {
 			Set<Field> result = new HashSet<Field>();
 			for (Field field : clazz.getDeclaredFields()) {
-				if (!field.isAnnotationPresent(Identity.class))
-					continue;
-				if (!Modifier.isPublic(field.getModifiers())) {
-					field.setAccessible(true);
+				if (field.isAnnotationPresent(Identity.class)) {
+					if (!Modifier.isPublic(field.getModifiers())) {
+						field.setAccessible(true);
+					}
+					result.add(field);
 				}
-				result.add(field);
 			}
 			Class<?> superclass = clazz.getSuperclass();
 			if (superclass != RichObject.class) {
-				result.addAll(GET_IDENTITY_FIELDS.call(superclass));
+				result.addAll(GET_IDENTITY_FIELDS.apply(superclass));
 			}
 			return Collections.unmodifiableSet(result);
 		}
@@ -53,11 +54,11 @@ public class RichObject {
 
 		// They must have precisely the same set of identity members to meet the
 		// symmetric & transitive requirement of equals
-		Set<Field> thisFields = GET_IDENTITY_FIELDS.call(this.getClass());
+		Set<Field> thisFields = GET_IDENTITY_FIELDS.apply(this.getClass());
 		if (thisFields.size() == 0) {
 			return false;
 		}
-		Set<Field> otherFields = GET_IDENTITY_FIELDS.call(other.getClass());
+		Set<Field> otherFields = GET_IDENTITY_FIELDS.apply(other.getClass());
 		if (!thisFields.equals(otherFields)) {
 			return false;
 		}
@@ -67,8 +68,8 @@ public class RichObject {
 				if (!equal(field.get(other), field.get(this)))
 					return false;
 			}
-		} catch (Exception e) {
-			throw new RuntimeException(e);
+		} catch (IllegalAccessException e) {
+			throw new IllegalStateException("All fields should be accessible", e);
 		}
 		return true;
 	}
@@ -84,13 +85,13 @@ public class RichObject {
 		final int prime = 37;
 		int result = 17;
 		try {
-			Set<Field> thisFields = GET_IDENTITY_FIELDS.call(this.getClass());
+			Set<Field> thisFields = GET_IDENTITY_FIELDS.apply(this.getClass());
 			for (Field field : thisFields) {
 				Object value = field.get(this);
 				result = prime * result + (value == null ? 0 : value.hashCode());
 			}
-		} catch (Exception e) {
-			throw new RuntimeException(e);
+		} catch (IllegalAccessException e) {
+			throw new IllegalStateException("All fields should be accessible", e);
 		}
 		if (this instanceof Immutable) {
 			hashCode = result;
@@ -106,22 +107,21 @@ public class RichObject {
 			return toString;
 		}
 
-		Set<Field> thisFields = GET_IDENTITY_FIELDS.call(this.getClass());
+		Set<Field> thisFields = GET_IDENTITY_FIELDS.apply(this.getClass());
 		if (thisFields.isEmpty()) {
 			return super.toString();
 		}
+		
 		StringBuilder builder = new StringBuilder(this.getClass().getSimpleName());
-        Collection<String> values = CollectionUtils.collect(thisFields, new Function<Field, String>() {
-            @Override
-            public String call(Field field) {
-                try {
-                    return field.getName() + "=" + field.get(RichObject.this);
-                } catch (IllegalAccessException e) {
-                    throw new IllegalStateException("Field " + field + " is not accessible - should be!", e);
-                }
-            }
-        });
-        builder.append(CollectionUtils.toString(values, ", "));
+		builder.append(Collections3.toString(thisFields, "[", ", ", "]", new Function<Field, String>() {
+			@Override public String apply(Field field) {
+				try {
+					return field.getName() + "=" + field.get(RichObject.this);
+				} catch (IllegalAccessException e) {
+					throw new IllegalStateException("All fields should be accessible", e);
+				}
+			}
+		}));
 
 		if (this instanceof Immutable) {
 			toString = builder.toString();
@@ -130,6 +130,6 @@ public class RichObject {
 	}
 
     public boolean instanceOf(Class<?> possibleSuperType) {
-        return ClassUtils.instanceOf(this, possibleSuperType);
+        return Classes.instanceOf(this, possibleSuperType);
     }
 }
