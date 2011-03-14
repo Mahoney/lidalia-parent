@@ -1,8 +1,9 @@
 package uk.org.lidalia.lang.testclasses;
 
 import uk.org.lidalia.lang.Identity;
+import uk.org.lidalia.lang.RichObject;
 
-public class ClassB extends uk.org.lidalia.lang.Object {
+public class ClassB extends RichObject {
 
 	@Identity
 	private String value1;

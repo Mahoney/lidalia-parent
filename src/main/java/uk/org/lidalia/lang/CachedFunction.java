@@ -10,8 +10,8 @@ public class CachedFunction<A, R> implements Function<A, R> {
 	private final ConcurrentMap<A, FutureTask<R>> cache = new ConcurrentHashMap<A, FutureTask<R>>();
 	private final Function<A, R> function;
 	
-	private CachedFunction(Function<A, R> operation) {
-		this.function = operation;
+	private CachedFunction(Function<A, R> function) {
+		this.function = function;
 	}
 
 	@Override
@@ -38,12 +38,12 @@ public class CachedFunction<A, R> implements Function<A, R> {
 				else if (e.getCause() instanceof Error)
 					throw (Error) e.getCause();
 				else
-					throw new IllegalStateException("Checked exception...", e.getCause());
+					throw new IllegalStateException(e.toString(), e.getCause());
 			}
 		}
 	}
 
-    public static <A, R> CachedFunction<A, R> make(Function<A, R> operation) {
-		return new CachedFunction<A, R>(operation);
+    public static <A, R> CachedFunction<A, R> make(Function<A, R> function) {
+		return new CachedFunction<A, R>(function);
 	}
 }

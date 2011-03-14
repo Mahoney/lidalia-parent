@@ -81,4 +81,10 @@ public class TestIdentity {
 		assertFalse(o1.equals(o2));
 		assertFalse(o2.equals(o1));
 	}
+
+    @Test public void toStringWorks() {
+        ClassA o = new ClassA();
+        o.setValue1("hello");
+        assertEquals("ClassA[value1=hello]", o.toString());
+    }
 }

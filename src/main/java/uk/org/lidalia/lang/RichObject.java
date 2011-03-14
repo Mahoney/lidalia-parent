@@ -2,6 +2,7 @@ package uk.org.lidalia.lang;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,10 +10,13 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Object {
+import static uk.org.lidalia.lang.ClassUtils.inSameClassHierarchy;
+import static uk.org.lidalia.lang.EqualityUtils.equal;
+
+public class RichObject {
+
 	private static final Function<Class<?>, Set<Field>> GET_IDENTITY_FIELDS = CachedFunction.make(new Function<Class<?>, Set<Field>>() {
-		@Override
-		public Set<Field> call(Class<?> clazz) {
+		@Override public Set<Field> call(Class<?> clazz) {
 			Set<Field> result = new HashSet<Field>();
 			for (Field field : clazz.getDeclaredFields()) {
 				if (!field.isAnnotationPresent(Identity.class))
@@ -23,7 +27,7 @@ public class Object {
 				result.add(field);
 			}
 			Class<?> superclass = clazz.getSuperclass();
-			if (superclass != Object.class) {
+			if (superclass != RichObject.class) {
 				result.addAll(GET_IDENTITY_FIELDS.call(superclass));
 			}
 			return Collections.unmodifiableSet(result);
@@ -33,11 +37,7 @@ public class Object {
 	
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 
-	private volatile int hashCode = 0;
-	private volatile String toString = null;
-
-	@Override
-	public final boolean equals(java.lang.Object other) {
+	@Override public final boolean equals(Object other) {
 		// Usual equals checks
 		if (other == this) {
 			return true;
@@ -64,10 +64,7 @@ public class Object {
 		
 		try {
 			for (Field field : thisFields) {
-				java.lang.Object otherValue = field.get(other);
-				java.lang.Object thisValue = field.get(this);
-				// Compare
-				if (!equal(otherValue, thisValue))
+				if (!equal(field.get(other), field.get(this)))
 					return false;
 			}
 		} catch (Exception e) {
@@ -76,14 +73,11 @@ public class Object {
 		return true;
 	}
 
-	private boolean inSameClassHierarchy(Class<?> a, Class<?> b) {
-		return a.isAssignableFrom(b) || b.isAssignableFrom(a);
-	}
+    private volatile int hashCode = -1;
 
-	@Override
-	public int hashCode() {
+    @Override public int hashCode() {
 
-		if (hashCode != 0) {
+		if (hashCode != -1) {
 			return hashCode;
 		}
 
@@ -91,9 +85,8 @@ public class Object {
 		int result = 17;
 		try {
 			Set<Field> thisFields = GET_IDENTITY_FIELDS.call(this.getClass());
-			java.lang.Object value = null;
 			for (Field field : thisFields) {
-				value = field.get(this);
+				Object value = field.get(this);
 				result = prime * result + (value == null ? 0 : value.hashCode());
 			}
 		} catch (Exception e) {
@@ -105,8 +98,9 @@ public class Object {
 		return result;
 	}
 
-	@Override
-	public String toString() {
+    private volatile String toString = null;
+
+	@Override public String toString() {
 
 		if (toString != null) {
 			return toString;
@@ -116,33 +110,26 @@ public class Object {
 		if (thisFields.isEmpty()) {
 			return super.toString();
 		}
-		StringBuilder builder = new StringBuilder(this.getClass().getSimpleName()).append('[');
-		try {
-			java.lang.Object value = null;
-			int i = 1;
-			for (Field field : thisFields) {
-				value = field.get(this);
-				builder.append(value);
-				if (i < thisFields.size()) {
-					builder.append(", ");
-				}
-				i++;
-			}
-			builder.append("]");
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
+		StringBuilder builder = new StringBuilder(this.getClass().getSimpleName());
+        Collection<String> values = CollectionUtils.collect(thisFields, new Function<Field, String>() {
+            @Override
+            public String call(Field field) {
+                try {
+                    return field.getName() + "=" + field.get(RichObject.this);
+                } catch (IllegalAccessException e) {
+                    throw new IllegalStateException("Field " + field + " is not accessible - should be!", e);
+                }
+            }
+        });
+        builder.append(CollectionUtils.toString(values, ", "));
+
 		if (this instanceof Immutable) {
 			toString = builder.toString();
 		}
 		return builder.toString();
 	}
-	
-	private boolean equal(java.lang.Object a, java.lang.Object b) {
-		if (a == b)
-			return true;
-		if (a == null || b == null)
-			return false;
-		return a.equals(b);
-	}
+
+    public boolean instanceOf(Class<?> possibleSuperType) {
+        return ClassUtils.instanceOf(this, possibleSuperType);
+    }
 }
