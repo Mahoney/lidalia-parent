@@ -11,11 +11,11 @@ public final class Classes {
 		return (Class<? extends CompileTimeType>) object.getClass();
 	}
 
-    public static boolean inSameClassHierarchy(Class<?> a, Class<?> b) {
-        return a.isAssignableFrom(b) || b.isAssignableFrom(a);
-    }
+	public static boolean inSameClassHierarchy(Class<?> a, Class<?> b) {
+			return a.isAssignableFrom(b) || b.isAssignableFrom(a);
+	}
 
-    private Classes() {
+	private Classes() {
 		throw new UnsupportedOperationException("Not instantiable");
 	}
 }

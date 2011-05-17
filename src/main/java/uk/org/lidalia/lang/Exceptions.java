@@ -26,6 +26,10 @@ package uk.org.lidalia.lang;
 
 import java.io.InterruptedIOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public final class Exceptions {
@@ -51,15 +55,24 @@ public final class Exceptions {
 		return result;
 	}
 
-	public static String throwableToString(String baseToString, Throwable cause) {
-		StringBuffer stringValue = new StringBuffer(baseToString);
-		if (cause != null) {
-			stringValue.append("; caused by: ").append(cause);
+	public static String throwableToString(String baseToString, List<Throwable> causes) {
+		if (causes.isEmpty()) {
+			return baseToString;
+		} else {
+			StringBuilder stringValue = new StringBuilder(baseToString);
+			stringValue.append("; caused by: ").append(causes);
+			return stringValue.toString();
 		}
-		return stringValue.toString();
 	}
 
 	private Exceptions() {
 		throw new UnsupportedOperationException("Not instantiable");
+	}
+
+	static List<Throwable> buildUnmodifiableCauseList(Throwable cause, Throwable[] otherCauses) {
+		ArrayList<Throwable> causes = new ArrayList<Throwable>(otherCauses.length + 1);
+		causes.add(cause);
+		causes.addAll(Arrays.asList(otherCauses));
+		return Collections.unmodifiableList(causes);
 	}
 }

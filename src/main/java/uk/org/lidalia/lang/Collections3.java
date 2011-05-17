@@ -33,7 +33,7 @@ public final class Collections3 {
 		return builder.toString();
 	}
 
-    private Collections3() {
+	private Collections3() {
 		throw new UnsupportedOperationException("Not instantiable");
 	}
 }
