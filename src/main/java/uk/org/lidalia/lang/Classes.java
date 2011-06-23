@@ -1,5 +1,7 @@
 package uk.org.lidalia.lang;
 
+import java.lang.reflect.Constructor;
+
 public final class Classes {
 
 	public static boolean instanceOf(Object o, Class<?> c) {
@@ -17,5 +19,14 @@ public final class Classes {
 
 	private Classes() {
 		throw new UnsupportedOperationException("Not instantiable");
+	}
+
+	public static boolean hasConstructor(Class<?> type, Class<?>... parameterTypes) throws SecurityException {
+		try {
+			Constructor<?> constructor = type.getConstructor(parameterTypes);
+			return constructor != null;
+		} catch (NoSuchMethodException e) {
+			return false;
+		}
 	}
 }

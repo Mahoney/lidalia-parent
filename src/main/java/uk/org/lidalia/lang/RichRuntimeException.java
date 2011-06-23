@@ -29,6 +29,10 @@ public class RichRuntimeException extends RuntimeException {
 		this.causes = Exceptions.buildUnmodifiableCauseList(cause, otherCauses);
 	}
 
+	public List<Throwable> getCauses() {
+		return causes;
+	}
+
 	@Override
 	public String toString() {
 		return Exceptions.throwableToString(super.toString(), causes);
