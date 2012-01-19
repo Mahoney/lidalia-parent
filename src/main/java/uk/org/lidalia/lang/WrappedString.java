@@ -8,7 +8,7 @@ public abstract class WrappedString extends WrappedValue<String> implements Immu
 	
 	@Override
 	public final String toString() {
-		return super.toString();
+		return wrappedValue;
 	}
 	
 	@Override

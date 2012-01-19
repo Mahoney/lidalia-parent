@@ -9,9 +9,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.google.common.base.Function;
 
 public class RichObject {
@@ -36,8 +33,6 @@ public class RichObject {
 		
 	});
 	
-	protected final Logger log = LoggerFactory.getLogger(getClass());
-
 	@Override public final boolean equals(Object other) {
 		// Usual equals checks
 		if (other == this) {
