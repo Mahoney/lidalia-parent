@@ -6,6 +6,7 @@
     <groupId>uk.org.lidalia</groupId>
     <artifactId>jvm-module</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../jvm-module</relativePath>
   </parent>
 	<artifactId>lidalia-lang</artifactId>
 	<name>Lidalia Lang</name>

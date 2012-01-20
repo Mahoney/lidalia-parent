@@ -11,7 +11,9 @@
     <module>parent</module>
     <module>jvm-parent</module>
     <module>jvm-app</module>
+    <module>lidalia-test</module>
     <module>jvm-module</module>
+    <module>lidalia-lang</module>
     <module>java-module</module>
     <module>scala-module</module>
   </modules>
