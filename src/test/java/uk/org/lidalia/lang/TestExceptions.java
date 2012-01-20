@@ -24,124 +24,12 @@
 
 package uk.org.lidalia.lang;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 import static uk.org.lidalia.test.Assert.assertNotInstantiable;
-import static uk.org.lidalia.test.Assert.shouldThrow;
-
-import java.io.InterruptedIOException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.concurrent.Callable;
 
 import org.junit.Test;
 
 public class TestExceptions {
 
-	@Test
-	public void asRuntimeExceptionThrowsIllegalArgumentExceptionWhenNullPassedIn() throws Throwable {
-		IllegalArgumentException iae = shouldThrow(IllegalArgumentException.class, new Callable<Void>() {
-			public Void call() throws Exception {
-				Exceptions.asRuntimeException(null);
-				return null;
-			}
-		});
-		assertEquals("Throwable argument cannot be null", iae.getMessage());
-	}
-
-	@Test
-	public void asRuntimeExceptionThrowsPassedInError() throws Throwable {
-		final Error expectedError = new Error();
-		shouldThrow(expectedError, new Callable<Void>() {
-			public Void call() throws Exception {
-				Exceptions.asRuntimeException(expectedError);
-				return null;
-			}
-		});
-	}
-
-	@Test
-	public void asRuntimeExceptionReturnsPassedInRuntimeException() {
-		RuntimeException expectedException = new RuntimeException();
-		RuntimeException actualException = Exceptions.asRuntimeException(expectedException);
-		assertSame(expectedException, actualException);
-	}
-	
-	@Test
-	public void asRuntimeExceptionReturnsPassedInCheckedExceptionAsCauseOfWrappedCheckedException() {
-		Exception expectedException = new Exception();
-		RuntimeException actualException = Exceptions.asRuntimeException(expectedException);
-		assertTrue(actualException instanceof WrappedCheckedException);
-		assertSame(expectedException, actualException.getCause());
-	}
-	
-	@Test
-	public void asRuntimeExceptionThrowsIllegalArgumentExceptionWhenInterruptedExceptionPassedIn() throws Throwable {
-		final InterruptedException expectedException = new InterruptedException();
-		IllegalArgumentException actualException = shouldThrow(IllegalArgumentException.class, new Callable<Void>() {
-			@Override
-			public Void call() throws Exception {
-				Exceptions.asRuntimeException(expectedException);
-				return null;
-			}
-		});
-		
-		assertTrue(actualException instanceof IllegalArgumentException);
-		assertSame(expectedException, actualException.getCause());
-		assertEquals("An interrupted exception needs to be handled to end the thread, or the interrupted status needs to be " +
-					"restored, or the exception needs to be propagated explicitly - it should not be used as an argument to " +
-					"this method", actualException.getMessage());
-	}
-	
-	@Test
-	public void asRuntimeExceptionThrowsIllegalArgumentExceptionWhenInterruptedIOExceptionPassedIn() throws Throwable {
-		final InterruptedIOException expectedException = new InterruptedIOException();
-		final IllegalArgumentException actualException = shouldThrow(IllegalArgumentException.class, new Callable<Void>() {
-			@Override
-			public Void call() throws Exception {
-				Exceptions.asRuntimeException(expectedException);
-				return null;
-			}
-		});
-		
-		assertTrue(actualException instanceof IllegalArgumentException);
-		assertSame(expectedException, actualException.getCause());
-		assertEquals("An interrupted exception needs to be handled to end the thread, or the interrupted status needs to be " +
-					"restored, or the exception needs to be propagated explicitly - it should not be used as an argument to " +
-					"this method", actualException.getMessage());
-	}
-	
-	@Test
-	public void asRuntimeExceptionThrowsPassedInInvocationTargetExceptionsCauseIfError() throws Throwable {
-		final Error expectedError = new Error();
-		final InvocationTargetException invocationTargetException = new InvocationTargetException(expectedError);
-
-		Error actualError = shouldThrow(Error.class, new Callable<Void>() {
-			public Void call() throws Exception {
-				Exceptions.asRuntimeException(invocationTargetException);
-				return null;
-			}
-		});
-		assertSame(expectedError, actualError);
-	}
-	
-	@Test
-	public void asRuntimeExceptionReturnsPassedInInvocationTargetExceptionsCauseIfRuntimeException() {
-		RuntimeException expectedException = new RuntimeException();
-		InvocationTargetException invocationTargetException = new InvocationTargetException(expectedException);
-		RuntimeException actualException = Exceptions.asRuntimeException(invocationTargetException);
-		assertSame(expectedException, actualException);
-	}
-	
-	@Test
-	public void asRuntimeExceptionReturnsPassedInInvocationTargetExceptionsCauseAsCauseOfWrappedCheckedExceptionIfCheckedException() {
-		Exception expectedException = new Exception();
-		InvocationTargetException invocationTargetException = new InvocationTargetException(expectedException);
-		RuntimeException actualException = Exceptions.asRuntimeException(invocationTargetException);
-		assertTrue(actualException instanceof WrappedCheckedException);
-		assertSame(expectedException, actualException.getCause());
-	}
-	
 	@Test
 	public void notInstantiable() throws Throwable {
 		assertNotInstantiable(Exceptions.class);

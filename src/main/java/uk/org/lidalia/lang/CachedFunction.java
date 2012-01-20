@@ -21,21 +21,20 @@ public class CachedFunction<A, R> implements Function<A, R> {
 		while (true) {
 			FutureTask<R> result = cache.get(args);
 			if (result == null) {
-                result = Maps.putIfAbsentReturningValue(cache, args, new FutureTask<R>(new Callable<R>() {
-                    @Override
-                    public R call() throws Exception {
-                        return function.apply(args);
-                    }
-                }));
-                result.run();
+	            result = Maps.putIfAbsentReturningValue(cache, args, new FutureTask<R>(new Callable<R>() {
+	                @Override
+	                public R call() throws Exception {
+	                    return function.apply(args);
+	                }
+	            }));
+	            result.run();
 			}
 			try {
 				return result.get();
 			} catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-				cache.remove(args, result);
+				// ignore - this is not interruptible.  Thread's interrupted state will already be reset to false.
 			} catch (ExecutionException e) {
-				throw Exceptions.asRuntimeException(e);
+				Exceptions.throwUnchecked(e.getCause());
 			}
 		}
 	}

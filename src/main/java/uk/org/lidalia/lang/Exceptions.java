@@ -24,36 +24,12 @@
 
 package uk.org.lidalia.lang;
 
-import java.io.InterruptedIOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public final class Exceptions {
-
-	public static RuntimeException asRuntimeException(final Throwable throwable) {
-		final RuntimeException result;
-		if (throwable == null) {
-			throw new IllegalArgumentException("Throwable argument cannot be null");
-		} else if (throwable instanceof Error) {
-			throw (Error) throwable;
-		} else if (throwable instanceof RuntimeException) {
-			result = (RuntimeException) throwable;
-		} else if (throwable instanceof InterruptedException || throwable instanceof InterruptedIOException) {
-			throw new IllegalArgumentException(
-					"An interrupted exception needs to be handled to end the thread, or the interrupted status needs to be " +
-					"restored, or the exception needs to be propagated explicitly - it should not be used as an argument to " +
-					"this method", throwable);
-		} else if (throwable instanceof InvocationTargetException || throwable instanceof ExecutionException) {
-			result = asRuntimeException(throwable.getCause());
-		} else {
-			result = new WrappedCheckedException(throwable);
-		}
-		return result;
-	}
 
 	public static String throwableToString(String baseToString, List<Throwable> causes) {
 		if (causes.isEmpty()) {
@@ -64,15 +40,25 @@ public final class Exceptions {
 			return stringValue.toString();
 		}
 	}
+	
+	public static void throwUnchecked(final Throwable ex){
+        Exceptions.<RuntimeException>throwsUnchecked(ex);
+        throw new AssertionError("This code should be unreachable. Something went terrible wrong here!");
+    }
 
-	private Exceptions() {
-		throw new UnsupportedOperationException("Not instantiable");
-	}
+    @SuppressWarnings("unchecked")
+	private static <T extends Throwable> void throwsUnchecked(Throwable toThrow) throws T {
+        throw (T) toThrow;
+    }
 
-	static List<Throwable> buildUnmodifiableCauseList(Throwable cause, Throwable[] otherCauses) {
+    static List<Throwable> buildUnmodifiableCauseList(Throwable cause, Throwable[] otherCauses) {
 		ArrayList<Throwable> causes = new ArrayList<Throwable>(otherCauses.length + 1);
 		causes.add(cause);
 		causes.addAll(Arrays.asList(otherCauses));
 		return Collections.unmodifiableList(causes);
+	}
+
+	private Exceptions() {
+		throw new UnsupportedOperationException("Not instantiable");
 	}
 }
