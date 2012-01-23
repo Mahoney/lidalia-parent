@@ -21,7 +21,6 @@
     <joda-time.version>2.0</joda-time.version>
     <joda-convert.version>1.1</joda-convert.version>
     <commons-lang.version>3.0.1</commons-lang.version>
-    <lidalia-lang.version>1.0.0-SNAPSHOT</lidalia-lang.version>
     <guava.version>11.0.1</guava.version>
     <javaee-web-api.version>6.0</javaee-web-api.version>
     <httpcore.version>4.1.3</httpcore.version>
@@ -35,6 +34,8 @@
     <hsqldb-j5.version>2.2.4</hsqldb-j5.version>
     <orbroker.version>3.1.1</orbroker.version>
     <lidalia-test.version>1.0.0-SNAPSHOT</lidalia-test.version>
+    <lidalia-net.version>1.0.0-SNAPSHOT</lidalia-net.version>
+    <lidalia-lang.version>1.0.0-SNAPSHOT</lidalia-lang.version>
 
     <!-- Plugins -->
     <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
@@ -44,6 +45,7 @@
     <maven-war-plugin.version>2.1.1</maven-war-plugin.version>
     <jasmine-maven-plugin.version>1.0.2-beta-5</jasmine-maven-plugin.version>
     <surefire.version>2.9</surefire.version>
+    <plexus-compiler-eclipse.version>1.8.3</plexus-compiler-eclipse.version>
   </properties>
   <developers>
     <developer>
@@ -122,6 +124,11 @@
         <groupId>uk.org.lidalia</groupId>
         <artifactId>lidalia-lang</artifactId>
         <version>${lidalia-lang.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>uk.org.lidalia</groupId>
+        <artifactId>lidalia-net</artifactId>
+        <version>${lidalia-net.version}</version>
       </dependency>
       <dependency>
         <groupId>${project.groupId}</groupId>
@@ -342,7 +349,15 @@
           <configuration>
             <source>${java.version}</source>
             <target>${java.version}</target>
+            <compilerId>eclipse</compilerId>
           </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>org.codehaus.plexus</groupId>
+              <artifactId>plexus-compiler-eclipse</artifactId>
+              <version>${plexus-compiler-eclipse.version}</version>
+            </dependency>
+          </dependencies>
         </plugin>
         <plugin>
           <groupId>org.scala-tools</groupId>
@@ -446,6 +461,37 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-war-plugin</artifactId>
           <version>${maven-war-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.m2e</groupId>
+          <artifactId>lifecycle-mapping</artifactId>
+          <version>1.0.0</version>
+          <configuration>
+            <lifecycleMappingMetadata>
+              <pluginExecutions>
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId>
+                      org.apache.maven.plugins
+                    </groupId>
+                    <artifactId>
+                      maven-compiler-plugin
+                    </artifactId>
+                    <versionRange>
+                      [2.3.2,)
+                    </versionRange>
+                    <goals>
+                      <goal>compile</goal>
+                      <goal>testCompile</goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore></ignore>
+                  </action>
+                </pluginExecution>
+              </pluginExecutions>
+            </lifecycleMappingMetadata>
+          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
