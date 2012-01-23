@@ -17,10 +17,6 @@ public final class Classes {
 			return a.isAssignableFrom(b) || b.isAssignableFrom(a);
 	}
 
-	private Classes() {
-		throw new UnsupportedOperationException("Not instantiable");
-	}
-
 	public static boolean hasConstructor(Class<?> type, Class<?>... parameterTypes) throws SecurityException {
 		try {
 			Constructor<?> constructor = type.getConstructor(parameterTypes);
@@ -28,5 +24,10 @@ public final class Classes {
 		} catch (NoSuchMethodException e) {
 			return false;
 		}
+
+	}
+
+	private Classes() {
+		throw new UnsupportedOperationException("Not instantiable");
 	}
 }
