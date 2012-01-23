@@ -10,7 +10,7 @@
   </parent>
 	<artifactId>lidalia-lang</artifactId>
 	<name>Lidalia Lang</name>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>${lidalia-lang.version}</version>
 	<description>Additions to java.lang</description>
 	<inceptionYear>2006</inceptionYear>
   <dependencies>
