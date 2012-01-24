@@ -16,5 +16,6 @@
     <module>lidalia-lang</module>
     <module>java-module</module>
     <module>scala-module</module>
+    <module>groovy-module</module>
   </modules>
 </project>

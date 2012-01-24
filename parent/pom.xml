@@ -36,6 +36,7 @@
     <lidalia-test.version>1.0.0-SNAPSHOT</lidalia-test.version>
     <lidalia-net.version>1.0.0-SNAPSHOT</lidalia-net.version>
     <lidalia-lang.version>1.0.0-SNAPSHOT</lidalia-lang.version>
+    <groovy.version>1.8.4</groovy.version>
 
     <!-- Plugins -->
     <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
@@ -164,6 +165,16 @@
         <groupId>org.hsqldb</groupId>
         <artifactId>hsqldb-j5</artifactId>
         <version>${hsqldb-j5.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.groovy</groupId>
+        <artifactId>groovy-all</artifactId>
+        <version>${groovy.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.ethz.ganymed</groupId>
+        <artifactId>ganymed-ssh2</artifactId>
+        <version>build210</version>
       </dependency>
 
       <!-- REST & HTTP -->
