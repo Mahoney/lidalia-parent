@@ -7,10 +7,14 @@
     <groupId>uk.org.lidalia</groupId>
     <artifactId>parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <relativePath>../parent</relativePath>
   </parent>
   <artifactId>jvm-parent</artifactId>
   <packaging>pom</packaging>
+  <modules>
+    <module>lidalia-test</module>
+    <module>jvm-app</module>
+    <module>jvm-module</module>
+  </modules>
   <dependencies>
     <dependency>
       <groupId>org.slf4j</groupId>

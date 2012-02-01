@@ -4,10 +4,15 @@
     <artifactId>jvm-parent</artifactId>
     <groupId>uk.org.lidalia</groupId>
     <version>0.0.1-SNAPSHOT</version>
-    <relativePath>../jvm-parent</relativePath>
   </parent>
   <artifactId>jvm-module</artifactId>
   <packaging>pom</packaging>
+  <modules>
+    <module>lidalia-lang</module>
+    <module>java-module</module>
+    <module>groovy-module</module>
+    <module>scala-module</module>
+  </modules>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -21,10 +26,6 @@
       <groupId>uk.org.lidalia</groupId>
       <artifactId>lidalia-test</artifactId>
     </dependency>
-    <!-- dependency>
-      <groupId>org.jdogma.junit</groupId>
-      <artifactId>configurable-parallel-computer</artifactId>
-    </dependency-->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-nop</artifactId>

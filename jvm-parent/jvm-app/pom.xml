@@ -7,7 +7,6 @@
     <groupId>uk.org.lidalia</groupId>
     <artifactId>jvm-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <relativePath>../jvm-parent</relativePath>
   </parent>
   <artifactId>jvm-app</artifactId>
   <packaging>pom</packaging>

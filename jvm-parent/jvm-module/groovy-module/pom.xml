@@ -5,7 +5,6 @@
     <artifactId>jvm-module</artifactId>
     <groupId>uk.org.lidalia</groupId>
     <version>0.0.1-SNAPSHOT</version>
-    <relativePath>../jvm-module</relativePath>
   </parent>
   <artifactId>groovy-module</artifactId>
   <packaging>pom</packaging>
