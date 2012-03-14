@@ -43,6 +43,7 @@
     <lidalia-net.version>1.0.0-SNAPSHOT</lidalia-net.version>
     <lidalia-lang.version>1.0.0-SNAPSHOT</lidalia-lang.version>
     <groovy.version>1.8.4</groovy.version>
+    <jetty.version>8.1.2.v20120308</jetty.version>
 
     <!-- Plugins -->
     <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
@@ -422,7 +423,11 @@
           <configuration>
             <container>
               <containerId>jetty8x</containerId>
-              <type>embedded</type>
+              <artifactInstaller>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-distribution</artifactId>
+                <version>${jetty.version}</version>
+              </artifactInstaller>
               <dependencies>
                 <dependency>
                   <groupId>uk.org.lidalia.sysout-over-slf4j</groupId>
