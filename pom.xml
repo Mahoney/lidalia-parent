@@ -5,11 +5,11 @@
   <artifactId>parent</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
-  
+
   <modules>
     <module>jvm-parent</module>
   </modules>
-  
+
   <properties>
     <!-- Encoding -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -43,6 +43,7 @@
     <lidalia-net.version>1.0.0-SNAPSHOT</lidalia-net.version>
     <lidalia-lang.version>1.0.0-SNAPSHOT</lidalia-lang.version>
     <groovy.version>1.8.4</groovy.version>
+    <jetty.version>8.1.2.v20120308</jetty.version>
 
     <!-- Plugins -->
     <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
@@ -53,6 +54,7 @@
     <jasmine-maven-plugin.version>1.0.2-beta-5</jasmine-maven-plugin.version>
     <surefire.version>2.9</surefire.version>
     <plexus-compiler-eclipse.version>1.8.3</plexus-compiler-eclipse.version>
+    <cargo-maven2-plugin.version>1.2.0</cargo-maven2-plugin.version>
   </properties>
   <developers>
     <developer>
@@ -223,6 +225,12 @@
         <scope>runtime</scope>
       </dependency>
       <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-simple</artifactId>
+        <version>${slf4j.version}</version>
+        <scope>runtime</scope>
+      </dependency>
+      <dependency>
         <groupId>uk.org.lidalia.sysout-over-slf4j</groupId>
         <artifactId>sysout-over-slf4j-context</artifactId>
         <version>${sysout-over-slf4j.version}</version>
@@ -386,43 +394,33 @@
           </configuration>
         </plugin>
         <plugin>
-          <groupId>org.mortbay.jetty</groupId>
-          <artifactId>jetty-maven-plugin</artifactId>
-          <version>${jetty-maven-plugin.version}</version>
-          <dependencies>
-            <dependency>
-              <groupId>uk.org.lidalia.sysout-over-slf4j</groupId>
-              <artifactId>sysout-over-slf4j-system</artifactId>
-              <version>${sysout-over-slf4j.version}</version>
-              <scope>runtime</scope>
-            </dependency>
-          </dependencies>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.tomcat.maven</groupId>
-          <artifactId>tomcat7-maven-plugin</artifactId>
-          <version>${tomcat-maven-plugin.version}</version>
-          <dependencies>
-            <dependency>
-              <groupId>uk.org.lidalia.sysout-over-slf4j</groupId>
-              <artifactId>sysout-over-slf4j-system</artifactId>
-              <version>${sysout-over-slf4j.version}</version>
-              <scope>runtime</scope>
-            </dependency>
-          </dependencies>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.tomcat.maven</groupId>
-          <artifactId>tomcat6-maven-plugin</artifactId>
-          <version>${tomcat-maven-plugin.version}</version>
-          <dependencies>
-            <dependency>
-              <groupId>uk.org.lidalia.sysout-over-slf4j</groupId>
-              <artifactId>sysout-over-slf4j-system</artifactId>
-              <version>${sysout-over-slf4j.version}</version>
-              <scope>runtime</scope>
-            </dependency>
-          </dependencies>
+          <groupId>org.codehaus.cargo</groupId>
+          <artifactId>cargo-maven2-plugin</artifactId>
+          <version>${cargo-maven2-plugin.version}</version>
+          <configuration>
+            <container>
+              <containerId>jetty8x</containerId>
+              <artifactInstaller>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-distribution</artifactId>
+                <version>${jetty.version}</version>
+              </artifactInstaller>
+              <dependencies>
+                <dependency>
+                  <groupId>uk.org.lidalia.sysout-over-slf4j</groupId>
+                  <artifactId>sysout-over-slf4j-system</artifactId>
+                </dependency>
+                <dependency>
+                  <groupId>org.slf4j</groupId>
+                  <artifactId>slf4j-api</artifactId>
+                </dependency>
+                <dependency>
+                  <groupId>org.slf4j</groupId>
+                  <artifactId>slf4j-simple</artifactId>
+                </dependency>
+              </dependencies>
+            </container>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>com.github.searls</groupId>
