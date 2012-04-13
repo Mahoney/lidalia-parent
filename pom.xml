@@ -36,7 +36,7 @@
     <mockito-core.version>1.9.0</mockito-core.version>
     <scalatest.version>1.6.1</scalatest.version>
     <configurable-parallel-computer.version>1.6</configurable-parallel-computer.version>
-    <java.version>1.6</java.version>
+    <jdk.version>1.6</jdk.version>
     <hsqldb-j5.version>2.2.4</hsqldb-j5.version>
     <orbroker.version>3.1.1</orbroker.version>
     <lidalia-test.version>1.0.0-SNAPSHOT</lidalia-test.version>
@@ -46,13 +46,59 @@
     <jetty.version>8.1.2.v20120308</jetty.version>
 
     <!-- Plugins -->
+    <!-- Core -->
+    <maven-clean-plugin.version>2.4.1</maven-clean-plugin.version>
     <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
+    <maven-deploy-plugin.version>2.7</maven-deploy-plugin.version>
+    <maven-failsafe-plugin.version>${maven-surefire-plugin.version}</maven-failsafe-plugin.version>
+    <maven-install-plugin.version>2.3.1</maven-install-plugin.version>
+    <maven-resources-plugin.version>2.5</maven-resources-plugin.version>
+    <maven-site-plugin.version>3.0</maven-site-plugin.version>
+    <maven-surefire-plugin.version>2.12</maven-surefire-plugin.version>
+    <maven-verifier-plugin.version>1.0</maven-verifier-plugin.version>
+
+    <!-- Packaging types / tools -->
+    <maven-ear-plugin.version>2.7</maven-ear-plugin.version>
+    <maven-ejb-plugin.version>2.3</maven-ejb-plugin.version>
+    <maven-jar-plugin.version>2.4</maven-jar-plugin.version>
+    <maven-rar-plugin.version>2.2</maven-rar-plugin.version>
+    <maven-war-plugin.version>2.2</maven-war-plugin.version>
+    <maven-app-client-plugin.version>1.0</maven-app-client-plugin.version>
+    <maven-shade-plugin.version>1.6</maven-shade-plugin.version>
+
+    <!-- Reporting -->
+
+    <!-- Tools -->
+    <maven-ant-plugin.version>2.3</maven-ant-plugin.version>
+    <maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
+    <maven-archetype-plugin.version>2.2</maven-archetype-plugin.version>
+    <maven-assembly-plugin.version>2.3</maven-assembly-plugin.version>
+    <maven-dependency-plugin.version>2.4</maven-dependency-plugin.version>
+    <maven-enforcer-plugin.version>1.0.1</maven-enforcer-plugin.version>
+    <maven-gpg-plugin.version>1.4</maven-gpg-plugin.version>
+    <maven-help-plugin.version>2.1.1</maven-help-plugin.version>
+    <maven-invoker-plugin.version>1.5</maven-invoker-plugin.version>
+    <maven-jarsigner-plugin.version>1.2</maven-jarsigner-plugin.version>
+    <maven-one-plugin.version>1.2</maven-one-plugin.version>
+    <maven-patch-plugin.version>1.1.1</maven-patch-plugin.version>
+    <maven-pdf-plugin.version>1.1</maven-pdf-plugin.version>
+    <maven-plugin-plugin.version>2.9</maven-plugin-plugin.version>
+    <maven-release-plugin.version>2.2.2</maven-release-plugin.version>
+    <maven-reactor-plugin.version>1.0</maven-reactor-plugin.version>
+    <maven-remote-resources-plugin.version>1.2.1</maven-remote-resources-plugin.version>
+    <maven-repository-plugin.version>2.3.1</maven-repository-plugin.version>
+    <maven-scm-plugin.version>1.5</maven-scm-plugin.version>
+    <maven-source-plugin.version>2.1.2</maven-source-plugin.version>
+    <maven-stage-plugin.version>1.0-alpha-2</maven-stage-plugin.version>
+    <maven-toolchains-plugin.version>1.0</maven-toolchains-plugin.version>
+
+    <!-- IDEs -->
+
+    <!-- Non-Core -->
     <maven-scala-plugin.version>2.15.2</maven-scala-plugin.version>
     <jetty-maven-plugin.version>8.0.0.v20110901</jetty-maven-plugin.version>
     <tomcat-maven-plugin.version>2.0-beta-1</tomcat-maven-plugin.version>
-    <maven-war-plugin.version>2.1.1</maven-war-plugin.version>
     <jasmine-maven-plugin.version>1.0.2-beta-5</jasmine-maven-plugin.version>
-    <surefire.version>2.9</surefire.version>
     <plexus-compiler-eclipse.version>1.8.3</plexus-compiler-eclipse.version>
     <cargo-maven2-plugin.version>1.2.0</cargo-maven2-plugin.version>
   </properties>
@@ -344,13 +390,18 @@
   <build>
     <pluginManagement>
       <plugins>
+        <!-- Core -->
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>${maven-clean-plugin.version}</version>
+        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>${maven-compiler-plugin.version}</version>
           <configuration>
-            <source>${java.version}</source>
-            <target>${java.version}</target>
+            <source>${jdk.version}</source>
+            <target>${jdk.version}</target>
             <compilerId>eclipse</compilerId>
           </configuration>
           <dependencies>
@@ -362,67 +413,13 @@
           </dependencies>
         </plugin>
         <plugin>
-          <groupId>org.scala-tools</groupId>
-          <artifactId>maven-scala-plugin</artifactId>
-          <version>${maven-scala-plugin.version}</version>
-          <configuration>
-            <sourceDir>src/main/scala</sourceDir>
-            <testSourceDir>src/test/scala</testSourceDir>
-          </configuration>
-          <executions>
-            <execution>
-              <goals>
-                <goal>compile</goal>
-                <goal>testCompile</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>${surefire.version}</version>
-          <configuration>
-            <includes>
-              <include>**/*Test.*</include>
-              <include>**/*Tests.*</include>
-              <include>**/Test*.*</include>
-            </includes>
-            <excludes>
-              <exclude>**/*$*.*</exclude>
-            </excludes>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.codehaus.cargo</groupId>
-          <artifactId>cargo-maven2-plugin</artifactId>
-          <version>${cargo-maven2-plugin.version}</version>
-          <configuration>
-            <container>
-              <containerId>jetty8x</containerId>
-              <artifactInstaller>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-distribution</artifactId>
-                <version>${jetty.version}</version>
-              </artifactInstaller>
-              <dependencies>
-                <dependency>
-                  <groupId>uk.org.lidalia.sysout-over-slf4j</groupId>
-                  <artifactId>sysout-over-slf4j-system</artifactId>
-                </dependency>
-              </dependencies>
-            </container>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>com.github.searls</groupId>
-          <artifactId>jasmine-maven-plugin</artifactId>
-          <version>${jasmine-maven-plugin.version}</version>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>${maven-deploy-plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
-          <version>${surefire.version}</version>
+          <version>${maven-surefire-plugin.version}</version>
           <configuration>
             <parallel>classes</parallel>
             <perCoreThreadCount>true</perCoreThreadCount>
@@ -452,9 +449,203 @@
           </executions>
         </plugin>
         <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>${maven-install-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>${maven-resources-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>${maven-site-plugin.version}</version>
+        </plugin>
+        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${maven-surefire-plugin.version}</version>
+          <configuration>
+            <includes>
+              <include>**/*Test.*</include>
+              <include>**/*Tests.*</include>
+              <include>**/Test*.*</include>
+            </includes>
+            <excludes>
+              <exclude>**/*$*.*</exclude>
+            </excludes>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-verifier-plugin</artifactId>
+          <version>${maven-verifier-plugin.version}</version>
+        </plugin>
+        <!-- End Core -->
+
+        <!-- Packaging types / tools -->
+        <plugin>
+          <artifactId>maven-ear-plugin</artifactId>
+          <version>${maven-ear-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-ejb-plugin</artifactId>
+          <version>${maven-ejb-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>${maven-jar-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-rar-plugin</artifactId>
+          <version>${maven-rar-plugin.version}</version>
+        </plugin>
+        <plugin>
           <artifactId>maven-war-plugin</artifactId>
           <version>${maven-war-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-app-client-plugin</artifactId>
+          <version>${maven-app-client-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>${maven-shade-plugin.version}</version>
+        </plugin>
+        <!-- End Packaging types / tools -->
+
+        <!-- Tools -->
+        <plugin>
+          <artifactId>maven-ant-plugin</artifactId>
+          <version>${maven-ant-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>${maven-antrun-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-archetype-plugin</artifactId>
+          <version>${maven-archetype-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>${maven-assembly-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>${maven-dependency-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>${maven-enforcer-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>${maven-gpg-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-help-plugin</artifactId>
+          <version>${maven-help-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-invoker-plugin</artifactId>
+          <version>${maven-invoker-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jarsigner-plugin</artifactId>
+          <version>${maven-jarsigner-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-one-plugin</artifactId>
+          <version>${maven-one-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-patch-plugin</artifactId>
+          <version>${maven-patch-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-pdf-plugin</artifactId>
+          <version>${maven-pdf-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-plugin-plugin</artifactId>
+          <version>${maven-plugin-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>${maven-release-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-reactor-plugin</artifactId>
+          <version>${maven-reactor-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-remote-resources-plugin</artifactId>
+          <version>${maven-remote-resources-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-repository-plugin</artifactId>
+          <version>${maven-repository-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-scm-plugin</artifactId>
+          <version>${maven-scm-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>${maven-source-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-stage-plugin</artifactId>
+          <version>${maven-stage-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-toolchains-plugin</artifactId>
+          <version>${maven-toolchains-plugin.version}</version>
+        </plugin>
+        <!-- End Tools -->
+
+        <!-- Other -->
+        <plugin>
+          <groupId>org.scala-tools</groupId>
+          <artifactId>maven-scala-plugin</artifactId>
+          <version>${maven-scala-plugin.version}</version>
+          <configuration>
+            <sourceDir>src/main/scala</sourceDir>
+            <testSourceDir>src/test/scala</testSourceDir>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>compile</goal>
+                <goal>testCompile</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.cargo</groupId>
+          <artifactId>cargo-maven2-plugin</artifactId>
+          <version>${cargo-maven2-plugin.version}</version>
+          <configuration>
+            <container>
+              <containerId>jetty8x</containerId>
+              <artifactInstaller>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-distribution</artifactId>
+                <version>${jetty.version}</version>
+              </artifactInstaller>
+              <dependencies>
+                <dependency>
+                  <groupId>uk.org.lidalia.sysout-over-slf4j</groupId>
+                  <artifactId>sysout-over-slf4j-system</artifactId>
+                </dependency>
+              </dependencies>
+            </container>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>com.github.searls</groupId>
+          <artifactId>jasmine-maven-plugin</artifactId>
+          <version>${jasmine-maven-plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.eclipse.m2e</groupId>
@@ -488,6 +679,7 @@
           </configuration>
         </plugin>
       </plugins>
+      <!-- End Other -->
     </pluginManagement>
   </build>
 </project>
