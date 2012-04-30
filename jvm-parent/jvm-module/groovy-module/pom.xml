@@ -4,7 +4,7 @@
   <parent>
     <artifactId>jvm-module</artifactId>
     <groupId>uk.org.lidalia</groupId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>groovy-module</artifactId>
   <packaging>pom</packaging>

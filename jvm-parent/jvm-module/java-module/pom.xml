@@ -6,7 +6,7 @@
   <parent>
     <groupId>uk.org.lidalia</groupId>
     <artifactId>jvm-module</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>java-module</artifactId>
   <packaging>pom</packaging>
@@ -32,12 +32,4 @@
       <artifactId>powermock-api-mockito</artifactId>
     </dependency>
   </dependencies>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
 </project>
