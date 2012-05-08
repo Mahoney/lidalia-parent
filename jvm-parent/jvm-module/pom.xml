@@ -9,7 +9,6 @@
   <packaging>pom</packaging>
   <modules>
     <module>java-module</module>
-    <module>scala-module</module>
   </modules>
   <dependencies>
     <dependency>
