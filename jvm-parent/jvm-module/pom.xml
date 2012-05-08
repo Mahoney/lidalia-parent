@@ -8,7 +8,6 @@
   <artifactId>jvm-module</artifactId>
   <packaging>pom</packaging>
   <modules>
-    <module>lidalia-lang</module>
     <module>java-module</module>
     <module>groovy-module</module>
     <module>scala-module</module>
