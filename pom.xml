@@ -4,6 +4,7 @@
     <artifactId>parent</artifactId>
     <groupId>uk.org.lidalia</groupId>
     <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../lidalia-parent</relativePath>
   </parent>
   <artifactId>jvm-library</artifactId>
   <packaging>pom</packaging>
@@ -46,10 +47,12 @@
     <dependency>
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>
