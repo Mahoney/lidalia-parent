@@ -13,7 +13,7 @@
 
     <!-- Versions -->
     <!-- Libraries -->
-    <slf4j.version>1.6.5</slf4j.version>
+    <slf4j.version>1.6.6</slf4j.version>
     <selenium.version>2.21.0</selenium.version>
     <jersey.version>1.12</jersey.version>
     <sysout-over-slf4j.version>2.0.0-SNAPSHOT</sysout-over-slf4j.version>
