@@ -6,6 +6,12 @@
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
+  <scm>
+    <connection>scm:git:git@github.com:Mahoney/lidalia-parent.git</connection>
+    <url>scm:git:git@github.com:Mahoney/lidalia-parent.git</url>
+    <developerConnection>scm:git:git@github.com:Mahoney/lidalia-parent.git</developerConnection>
+  </scm>
+
   <properties>
     <!-- Encoding -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -61,7 +67,7 @@
     <maven-jar-plugin.version>2.4</maven-jar-plugin.version>
     <maven-rar-plugin.version>2.2</maven-rar-plugin.version>
     <maven-war-plugin.version>2.2</maven-war-plugin.version>
-    <maven-acr-client-plugin.version>1.0</maven-acr-client-plugin.version>
+    <maven-acr-plugin.version>1.0</maven-acr-plugin.version>
     <maven-shade-plugin.version>1.6</maven-shade-plugin.version>
 
     <!-- Reporting -->
@@ -503,8 +509,8 @@
           <version>${maven-war-plugin.version}</version>
         </plugin>
         <plugin>
-          <artifactId>maven-app-client-plugin</artifactId>
-          <version>${maven-app-client-plugin.version}</version>
+          <artifactId>maven-acr-plugin</artifactId>
+          <version>${maven-acr-plugin.version}</version>
         </plugin>
         <plugin>
           <artifactId>maven-shade-plugin</artifactId>
