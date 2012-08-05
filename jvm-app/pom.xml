@@ -10,6 +10,18 @@
   </parent>
   <artifactId>jvm-app</artifactId>
   <packaging>pom</packaging>
+
+  <name>Lidalia JVM App POM</name>
+  <description>Defines the usual logging dependencies for an application of any type (as opposed to a library).</description>
+  <url>http://projects.lidalia.org.uk/lidalia-parent</url>
+  <licenses>
+    <license>
+      <name>MIT X11 License</name>
+      <url>https://github.com/Mahoney/lidalia-parent/raw/master/X11-LICENSE.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
   <dependencies>
     <dependency>
       <groupId>ch.qos.logback</groupId>
@@ -26,6 +38,10 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>jul-to-slf4j</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>uk.org.lidalia</groupId>
+      <artifactId>jul-to-slf4j-config</artifactId>
     </dependency>
     <dependency>
       <groupId>commons-logging</groupId>

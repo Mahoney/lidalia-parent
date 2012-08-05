@@ -6,6 +6,19 @@
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
+  <name>Lidalia Parent POM</name>
+  <description>A convenient parent pom defining versions &amp; scopes for common libraries and
+    versions &amp; configuration for common plugins via dependencyManagement &amp;
+    pluginManagement sections.</description>
+  <url>http://projects.lidalia.org.uk/lidalia-parent</url>
+  <licenses>
+    <license>
+      <name>MIT X11 License</name>
+      <url>https://github.com/Mahoney/lidalia-parent/raw/master/X11-LICENSE.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
   <scm>
     <connection>scm:git:git@github.com:Mahoney/lidalia-parent.git</connection>
     <url>scm:git:git@github.com:Mahoney/lidalia-parent.git</url>
@@ -36,6 +49,7 @@
     <httpclient.version>4.1.3</httpclient.version>
     <logback.version>1.0.6</logback.version>
     <junit.version>4.10</junit.version>
+    <hamcrest.version>1.3</hamcrest.version>
     <mockito-core.version>1.9.0</mockito-core.version>
     <scalatest.version>1.6.1</scalatest.version>
     <jdk.version>1.6</jdk.version>
@@ -255,6 +269,12 @@
         <scope>runtime</scope>
       </dependency>
       <dependency>
+        <groupId>uk.org.lidalia</groupId>
+        <artifactId>jul-to-slf4j-config</artifactId>
+        <version>1.0.0</version>
+        <scope>runtime</scope>
+      </dependency>
+      <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>log4j-over-slf4j</artifactId>
         <version>${slf4j.version}</version>
@@ -311,9 +331,9 @@
         <scope>test</scope>
       </dependency>
       <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>${junit.version}</version>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-core</artifactId>
+        <version>${hamcrest.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
