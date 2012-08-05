@@ -25,6 +25,11 @@
     <tag>HEAD</tag>
   </scm>
 
+  <modules>
+    <module>jvm-library</module>
+    <module>jvm-app</module>
+  </modules>
+
   <properties>
     <sonatypeOssDistMgmtSnapshotsUrl>https://oss.sonatype.org/content/repositories/snapshots/</sonatypeOssDistMgmtSnapshotsUrl>
 
