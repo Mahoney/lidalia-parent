@@ -22,7 +22,6 @@
     <connection>scm:git:git@github.com:Mahoney/lidalia-parent.git</connection>
     <url>scm:git:git@github.com:Mahoney/lidalia-parent.git</url>
     <developerConnection>scm:git:git@github.com:Mahoney/lidalia-parent.git</developerConnection>
-    <tag>HEAD</tag>
   </scm>
 
   <modules>
@@ -271,6 +270,12 @@
         <groupId>org.slf4j</groupId>
         <artifactId>jul-to-slf4j</artifactId>
         <version>${slf4j.version}</version>
+        <scope>runtime</scope>
+      </dependency>
+      <dependency>
+        <groupId>uk.org.lidalia</groupId>
+        <artifactId>jul-to-slf4j-config</artifactId>
+        <version>1.0.0</version>
         <scope>runtime</scope>
       </dependency>
       <dependency>
