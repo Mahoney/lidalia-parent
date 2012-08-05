@@ -1,8 +1,9 @@
 target
+.DS_Store
 .project
 .classpath
 .settings
-.DS_Store
+.externalToolBuilders
 bin
 *.iml
 *.iws
