@@ -451,24 +451,10 @@
         <plugin>
           <artifactId>maven-checkstyle-plugin</artifactId>
           <version>2.9.1</version>
-          <dependencies>
-            <dependency>
-              <groupId>uk.org.lidalia</groupId>
-              <artifactId>coding-standards</artifactId>
-              <version>1.0.0</version>
-            </dependency>
-          </dependencies>
         </plugin>
         <plugin>
           <artifactId>maven-pmd-plugin</artifactId>
           <version>2.7.1</version>
-          <dependencies>
-            <dependency>
-              <groupId>uk.org.lidalia</groupId>
-              <artifactId>coding-standards</artifactId>
-              <version>1.0.0</version>
-            </dependency>
-          </dependencies>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -505,6 +491,13 @@
               </goals>
             </execution>
           </executions>
+          <dependencies>
+            <dependency>
+              <groupId>uk.org.lidalia</groupId>
+              <artifactId>coding-standards</artifactId>
+              <version>1.0.0</version>
+            </dependency>
+          </dependencies>
           <configuration>
             <reportPlugins>
               <plugin>
