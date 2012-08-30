@@ -111,15 +111,7 @@
     <plexus-compiler-eclipse.version>1.8.3</plexus-compiler-eclipse.version>
     <cargo-maven2-plugin.version>1.2.4</cargo-maven2-plugin.version>
   </properties>
-  <developers>
-    <developer>
-      <name>Robert Elliot</name>
-      <email>rob@lidalia.org.uk</email>
-      <roles>
-        <role>Lead Developer</role>
-      </roles>
-    </developer>
-  </developers>
+
   <repositories>
     <repository>
       <id>java.net2</id>
@@ -131,6 +123,7 @@
       <url>http://version99.qos.ch/</url>
     </repository>
   </repositories>
+
   <dependencyManagement>
     <dependencies>
 
