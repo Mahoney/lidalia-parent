@@ -489,6 +489,7 @@
                   <rulesets>
                     <ruleset>pmd/pmd-rules.xml</ruleset>
                   </rulesets>
+                  <targetJdk>${jdk.version}</targetJdk>
                 </configuration>
               </plugin>
               <plugin>
