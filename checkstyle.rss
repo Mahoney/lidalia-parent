@@ -2,20 +2,20 @@
 
 <rss version="0.91">
   <channel>
-    <title>sandbox - Checkstyle report</title>
-    <link>http://projects.lidalia.org.uk/lidalia-parent/sandbox</link>
-    <description>sandbox - Checkstyle report</description>
+    <title>module1 - Checkstyle report</title>
+    <link>http://projects.lidalia.org.uk/lidalia-parent/lidalia-jvm-library/module1</link>
+    <description>module1 - Checkstyle report</description>
     <language>en-us</language>
     <copyright>&#169;2012</copyright>
     <item>
-      <title>File: 2,
+      <title>File: 1,
              Errors: 0,
              Warnings: 0,
              Infos: 0
       </title>
-            <link>http://projects.lidalia.org.uk/lidalia-parent/sandbox/checkstyle.html</link>
+            <link>http://projects.lidalia.org.uk/lidalia-parent/lidalia-jvm-library/module1/checkstyle.html</link>
       <description>
-        <p>Click <a href="http://projects.lidalia.org.uk/lidalia-parent/sandbox/checkstyle.html">here</a> for the full Checkstyle report.</p>
+        <p>Click <a href="http://projects.lidalia.org.uk/lidalia-parent/lidalia-jvm-library/module1/checkstyle.html">here</a> for the full Checkstyle report.</p>
 
         <table summary="Files" boder="1">
           <thead>
@@ -29,21 +29,7 @@
           <tbody>
                           <tr>
                 <td>
-                  <a href="http://projects.lidalia.org.uk/lidalia-parent/sandbox/checkstyle.html#sandbox.module2.Sandbox2.java">sandbox/module2/Sandbox2.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://projects.lidalia.org.uk/lidalia-parent/sandbox/checkstyle.html#sandbox.module1.Sandbox1.java">sandbox/module1/Sandbox1.java</a>
+                  <a href="http://projects.lidalia.org.uk/lidalia-parent/lidalia-jvm-library/module1/checkstyle.html#sandbox.module1.Sandbox1.java">sandbox/module1/Sandbox1.java</a>
                 </td>
                 <td>
                   0
