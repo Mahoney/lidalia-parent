@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd version="4.3" timestamp="2012-09-09T20:50:05.082">
+<file name="/Users/Robert/Workspaces/Lidalia Utilities/sandbox/module1/src/main/java/sandbox/module1/Sandbox1.java">
+<violation beginline="3" endline="4" begincolumn="8" endcolumn="1" rule="AtLeastOneConstructor" ruleset="Controversial Rules" package="sandbox.module1" externalInfoUrl="http://pmd.sourceforge.net/rules/controversial.html#AtLeastOneConstructor" priority="3">
+Each class should declare at least one constructor
+</violation>
+</file>
+<file name="/Users/Robert/Workspaces/Lidalia Utilities/sandbox/module2/src/main/java/sandbox/module2/Sandbox2.java">
+<violation beginline="3" endline="4" begincolumn="8" endcolumn="1" rule="AtLeastOneConstructor" ruleset="Controversial Rules" package="sandbox.module2" externalInfoUrl="http://pmd.sourceforge.net/rules/controversial.html#AtLeastOneConstructor" priority="3">
+Each class should declare at least one constructor
+</violation>
+</file>
+</pmd>
