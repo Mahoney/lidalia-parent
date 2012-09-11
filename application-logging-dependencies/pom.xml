@@ -8,19 +8,11 @@
     <artifactId>parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <artifactId>jvm-app</artifactId>
+  <artifactId>application-logging-dependencies</artifactId>
   <packaging>pom</packaging>
 
-  <name>Lidalia JVM App POM</name>
+  <name>Lidalia Application Logging Dependencies</name>
   <description>Defines the usual logging dependencies for an application of any type (as opposed to a library).</description>
-  <url>http://projects.lidalia.org.uk/lidalia-parent</url>
-  <licenses>
-    <license>
-      <name>MIT X11 License</name>
-      <url>https://github.com/Mahoney/lidalia-parent/raw/master/X11-LICENSE.txt</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
 
   <dependencies>
     <dependency>
@@ -52,20 +44,4 @@
       <artifactId>log4j</artifactId>
     </dependency>
   </dependencies>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <excludes>
-            <exclude>**/*.*</exclude>
-          </excludes>
-          <testExcludes>
-            <exclude>**/*.*</exclude>
-          </testExcludes>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 </project>

@@ -31,8 +31,8 @@
   </scm>
 
   <modules>
-    <module>jvm-library</module>
-    <module>jvm-app</module>
+    <module>standard-test-dependencies</module>
+    <module>application-logging-dependencies</module>
   </modules>
 
   <properties>
@@ -413,7 +413,7 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>cobertura-maven-plugin</artifactId>
-          <version>2.5.1</version>
+          <version>2.4</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -475,6 +475,9 @@
               </plugin>
               <plugin>
                 <artifactId>maven-surefire-report-plugin</artifactId>
+                <configuration>
+                  <aggregate>true</aggregate>
+                </configuration>
               </plugin>
               <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>

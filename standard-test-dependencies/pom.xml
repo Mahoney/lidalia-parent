@@ -5,81 +5,65 @@
     <groupId>uk.org.lidalia</groupId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <artifactId>jvm-library</artifactId>
+  <artifactId>standard-test-dependencies</artifactId>
   <packaging>pom</packaging>
 
-  <name>Lidalia JVM App POM</name>
-  <description>Defines the usual unit testing dependencies for a library.</description>
-  <url>http://projects.lidalia.org.uk/lidalia-parent</url>
-  <licenses>
-    <license>
-      <name>MIT X11 License</name>
-      <url>https://github.com/Mahoney/lidalia-parent/raw/master/X11-LICENSE.txt</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-
+  <name>Standard JVM Test Dependencies</name>
+  <description>Defines the usual unit testing dependencies for a library.
+    This artifact should be included as a dependency with a scope of test.</description>
   <dependencies>
 
     <!-- Testing -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit-dep</artifactId>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.hamcrest</groupId>
       <artifactId>hamcrest-core</artifactId>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.powermock</groupId>
       <artifactId>powermock-module-junit4</artifactId>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.powermock</groupId>
       <artifactId>powermock-api-mockito</artifactId>
+      <scope>compile</scope>
     </dependency>
 
     <!-- Logging -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>jcl-over-slf4j</artifactId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>jul-to-slf4j</artifactId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>uk.org.lidalia</groupId>
       <artifactId>jul-to-slf4j-config</artifactId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>log4j-over-slf4j</artifactId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging</artifactId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
-      <scope>test</scope>
     </dependency>
   </dependencies>
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-site-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
 </project>
