@@ -31,8 +31,10 @@
   </scm>
 
   <modules>
+    <module>logging-dependencies</module>
     <module>standard-test-dependencies</module>
     <module>application-logging-dependencies</module>
+    <module>opensource-single-module-project</module>
   </modules>
 
   <properties>

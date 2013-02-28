@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>parent</artifactId>
+    <groupId>uk.org.lidalia</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>uk.org.lidalia</groupId>
+  <artifactId>opensource-single-module-project</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Lidalia Open Source Single Module Project POM</name>
+  <description>A convenient parent pom for defining open source single module projects on github.</description>
+  <url>http://projects.lidalia.org.uk/${project.artifactId}</url>
+  <licenses>
+    <license>
+      <name>MIT X11 License</name>
+      <url>https://github.com/Mahoney/lidalia-parent/raw/master/X11-LICENSE.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <scm>
+    <url>https://github.com/Mahoney/${project.artifactId}</url>
+    <connection>scm:git:git@github.com:Mahoney/${project.artifactId}.git</connection>
+    <developerConnection>scm:git:git@github.com:Mahoney/${project.artifactId}.git</developerConnection>
+  </scm>
+
+  <distributionManagement>
+    <site>
+      <id>gh-pages</id>
+      <url>scm:git:ssh://git@github.com/Mahoney/${project.artifactId}.git</url>
+    </site>
+  </distributionManagement>
+
+</project>

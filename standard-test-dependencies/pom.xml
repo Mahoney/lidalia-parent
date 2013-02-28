@@ -47,28 +47,11 @@
 
     <!-- Logging -->
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jcl-over-slf4j</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jul-to-slf4j</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>uk.org.lidalia</groupId>
-      <artifactId>jul-to-slf4j-config</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>log4j-over-slf4j</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>commons-logging</groupId>
-      <artifactId>commons-logging</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>logging-dependencies</artifactId>
+      <version>${project.version}</version>
+      <type>pom</type>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
 </project>
