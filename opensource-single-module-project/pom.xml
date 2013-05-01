@@ -9,9 +9,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>uk.org.lidalia</groupId>
   <artifactId>opensource-single-module-project</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Lidalia Open Source Single Module Project POM</name>
@@ -25,17 +23,47 @@
     </license>
   </licenses>
 
-  <scm>
-    <url>https://github.com/Mahoney/${project.artifactId}</url>
-    <connection>scm:git:git@github.com:Mahoney/${project.artifactId}.git</connection>
-    <developerConnection>scm:git:git@github.com:Mahoney/${project.artifactId}.git</developerConnection>
-  </scm>
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>http://github.com/Mahoney/${project.artifactId}/issues</url>
+  </issueManagement>
 
-  <distributionManagement>
-    <site>
-      <id>gh-pages</id>
-      <url>scm:git:ssh://git@github.com/Mahoney/${project.artifactId}.git</url>
-    </site>
-  </distributionManagement>
-
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-scm-publish-plugin</artifactId>
+        <configuration>
+          <scmBranch>gh-pages</scmBranch>
+          <pubScmUrl>scm:git:git@github.com:Mahoney/${project.artifactId}.git</pubScmUrl>
+        </configuration>
+        <executions>
+          <execution>
+            <id>scm-publish</id>
+            <phase>site-deploy</phase>
+            <goals>
+              <goal>publish-scm</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-site-plugin</artifactId>
+        <configuration>
+          <skipDeploy>true</skipDeploy>
+        </configuration>
+        <executions>
+          <execution>
+            <id>stage-for-scm-publish</id>
+            <phase>post-site</phase>
+            <goals>
+              <goal>stage</goal>
+            </goals>
+            <configuration>
+              <skipDeploy>false</skipDeploy>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>
