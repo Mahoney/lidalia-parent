@@ -28,6 +28,7 @@
     <url>https://github.com/Mahoney/lidalia-parent</url>
     <connection>scm:git:git@github.com:Mahoney/lidalia-parent.git</connection>
     <developerConnection>scm:git:git@github.com:Mahoney/lidalia-parent.git</developerConnection>
+    <tag>HEAD</tag>
   </scm>
 
   <modules>
