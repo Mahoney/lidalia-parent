@@ -44,6 +44,11 @@
       <artifactId>powermock-api-mockito</artifactId>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>pl.pragmatists</groupId>
+      <artifactId>JUnitParams</artifactId>
+      <scope>compile</scope>
+    </dependency>
 
     <!-- Logging -->
     <dependency>
