@@ -8,7 +8,7 @@
   </parent>
 
   <artifactId>parent</artifactId>
-  <version>1.0.0-jdk6</version>
+  <version>1.0.0-jdk6-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Lidalia Parent POM</name>
