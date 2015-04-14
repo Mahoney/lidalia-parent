@@ -65,8 +65,7 @@
     <mockito-core.version>1.9.5</mockito-core.version>
     <scalatest.version>2.2.0</scalatest.version>
     <jdk.version>1.7</jdk.version>
-    <hsqldb-j5.version>2.3.2</hsqldb-j5.version>
-    <orbroker.version>3.2.1-1</orbroker.version>
+    <hsqldb.version>2.3.2</hsqldb.version>
     <groovy.version>2.1.8</groovy.version>
     <jetty.version>8.1.2.v20120308</jetty.version>
 
@@ -174,8 +173,8 @@
 
       <dependency>
         <groupId>org.hsqldb</groupId>
-        <artifactId>hsqldb-j5</artifactId>
-        <version>${hsqldb-j5.version}</version>
+        <artifactId>hsqldb</artifactId>
+        <version>${hsqldb.version}</version>
       </dependency>
       <dependency>
         <groupId>org.codehaus.groovy</groupId>
@@ -219,11 +218,6 @@
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpclient</artifactId>
         <version>${httpclient.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.orbroker</groupId>
-        <artifactId>orbroker</artifactId>
-        <version>${orbroker.version}</version>
       </dependency>
 
       <!-- Logging -->
@@ -337,7 +331,7 @@
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit-dep</artifactId>
-        <version>${junit.version}</version>
+        <version>4.11</version>
         <scope>test</scope>
       </dependency>
       <dependency>
@@ -736,7 +730,7 @@
           <dependency>
             <groupId>uk.org.lidalia</groupId>
             <artifactId>java-coding-standards</artifactId>
-            <version>1.0.0</version>
+            <version>1.1.0</version>
           </dependency>
           <dependency>
             <groupId>org.apache.maven.wagon</groupId>
